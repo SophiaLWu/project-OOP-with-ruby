@@ -4,10 +4,6 @@ This is a rendition of the classic Tic Tac Toe game on the command line interfac
 
 The project is described in the section [Project: OOP with Ruby](http://www.theodinproject.com/courses/ruby-programming/lessons/oop) from The Ruby Programming portion of The Odin Project.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tic_tac_toe`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
