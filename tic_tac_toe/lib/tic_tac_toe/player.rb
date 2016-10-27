@@ -2,12 +2,11 @@ module TicTacToe
 
   # Represents a single human player
   class Player
-    attr_reader :name
-    attr_accessor :turn
+    attr_reader :name, :mark
 
-    def initialize(name, turn)
+    def initialize(name, mark)
       @name = name
-      @turn = false
+      @mark = mark
     end
 
   end

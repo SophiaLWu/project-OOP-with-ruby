@@ -29,7 +29,13 @@ module TicTacToe
     end
 
     def print
+      puts
+      puts "=================================================================="
+      puts
+      puts "CURRENT BOARD:"
+      puts
       puts @board
+      puts
     end
 
   end
