@@ -28,6 +28,10 @@ module TicTacToe
       board
     end
 
+    def print
+      puts @board
+    end
+
   end
 
 end
