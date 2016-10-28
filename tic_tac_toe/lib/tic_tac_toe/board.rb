@@ -1,3 +1,5 @@
+require "colorize"
+
 module TicTacToe
 
   # Represents the game board which consists of nine cells
@@ -41,7 +43,12 @@ module TicTacToe
           unless i == 0
             board << "|"
           end
-          board << " #{cell.state} "
+          if cell.state == "X"
+            color = :red
+          elsif cell.state == "O"
+            color = :blue
+          end
+          board << " #{cell.state} ".colorize(color)
         end
         unless col == 2
           board << "\n#{horizontal_border}\n"

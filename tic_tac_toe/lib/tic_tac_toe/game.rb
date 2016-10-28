@@ -68,7 +68,12 @@ module TicTacToe
 
     # Returns an array of coordinates of the cell the player wants to mark
     def take_turn(player)
-      puts "#{player.name} ('#{player.mark}'), it's your turn."
+      if player == @player1
+        color = :red
+      else
+        color = :blue
+      end
+      puts "#{player.name} ('#{player.mark}'), it's your turn.".colorize(color)
       puts
       puts "What cell do you want to place your '#{player.mark}'? "\
            "(Choose a cell number from 1-9)"
@@ -149,12 +154,19 @@ module TicTacToe
 
     # Creates ending screen for game finish
     def ending_screen
+      if @winner == @player1
+        color = :red
+      elsif @winner == @player2
+        color = :blue
+      else
+        color = :green
+      end
       puts
       puts "The game is finished."
       if @winner.nil?
-        puts "The game is a draw!"
+        puts "The game is a draw!".colorize(color)
       else
-        puts "#{@winner.name} wins the game!"
+        puts "#{@winner.name} wins the game!".colorize(color)
       end
       puts
       puts "Would you like to play again? (Y/N)"
