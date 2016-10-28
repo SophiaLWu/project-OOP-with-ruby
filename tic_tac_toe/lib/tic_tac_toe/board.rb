@@ -58,15 +58,6 @@ module TicTacToe
       board
     end
 
-    # For testing purposes
-    def show_cell_states
-      @cells.each_with_index do |row, i|
-        row.each_with_index do |cell, j|
-          puts "row: #{i}, col: #{j}, state: #{cell.state}"
-        end
-      end
-    end
-
     # Prints the board in a pretty way
     def print_board
       puts
