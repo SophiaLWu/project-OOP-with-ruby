@@ -16,6 +16,7 @@ module TicTacToe
       @board_display = create_board
     end
 
+    # Creates the instructions sample board and prints it
     def print_instructions_board
       cell_number = 1
       @cells.each do |row|
@@ -30,6 +31,7 @@ module TicTacToe
       puts create_board
     end
 
+    # Creates the tic-tac-toe board in string format
     def create_board
       board = ""
       horizontal_border = "---+---+---"
