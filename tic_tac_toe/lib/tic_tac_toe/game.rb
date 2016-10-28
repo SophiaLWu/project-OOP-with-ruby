@@ -15,7 +15,10 @@ module TicTacToe
       @restart = false
       @winner = nil
       start_game
-      play_game
+      puts "Please type 'ready' when you are ready to start playing!"
+      print ">> "
+      input = gets.chomp
+      play_game if input.downcase == "ready"
     end
 
     # Begins the game with instructions and a call to the play_game method
@@ -42,6 +45,7 @@ module TicTacToe
       puts
       instructions_board.print_instructions_board
       puts 
+
     end
 
     # Includes a loop that continues to allow players to add marks to

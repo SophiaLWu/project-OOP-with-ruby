@@ -22,7 +22,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Execute the following command to start the game:
+
+    $ ruby play_game.rb
+
 
 ## Development
 
