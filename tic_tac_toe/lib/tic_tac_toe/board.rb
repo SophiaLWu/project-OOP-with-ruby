@@ -2,7 +2,6 @@ module TicTacToe
 
   # Represents the game board which consists of nine cells
   class Board
-    attr_accessor :board # temporarily here for testing purposes
 
     def initialize
       @cells = Array.new(3, Array.new(3, Cell.new))
@@ -30,7 +29,7 @@ module TicTacToe
 
     def print
       puts
-      puts "=================================================================="
+      puts "=" * 70
       puts
       puts "CURRENT BOARD:"
       puts
