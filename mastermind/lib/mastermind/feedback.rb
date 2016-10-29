@@ -5,7 +5,7 @@ module Mastermind
     attr_accessor :clues
 
     def initialize
-      @clues = {black: 0, white: 0}
+      @clues = {correct: 0, correct_color: 0}
     end
 
   end

@@ -10,16 +10,17 @@ module Mastermind
     end
 
     context "#clues" do
-      it "returns an object that maps clue type (black or white) to a number" do
+      it "returns an object that maps clue type" \
+         "(correct or correct_color) to a number" do
         feedback = Feedback.new
-        expect(feedback.clues) == {black: 0, white: 0}
+        expect(feedback.clues) == {correct: 0, correct_color: 0}
       end
 
       it "allows the changing of the clues objects' values" do
         feedback = Feedback.new
-        feedback.clues[:black] += 2
-        feedback.clues[:white] += 1
-        expect(feedback.clues) == {black: 2, white: 1}
+        feedback.clues[:correct] += 2
+        feedback.clues[:correct_color] += 1
+        expect(feedback.clues) == {correct: 2, correct_color: 1}
       end
     end
 
