@@ -24,16 +24,17 @@ module Mastermind
       board_as_text << "-" * 68 << "\n"
       @board_items.each_with_index do |block, i|
         if i < 10
-          board_as_text << "   #{i}   "
+          board_as_text << "   #{i + 1}   "
         else
-          board_as_text << "   #{i}  "
+          board_as_text << "   #{i + 1}  "
         end
         block[0].colors.each do |color| 
           board_as_text << "      #{color.to_s[0]}  " 
         end
-        block[1].clues.each { |clue, num| board_as_text << "        #{num}   " }
+        block[1].each { |clue, num| board_as_text << "        #{num}   " }
         board_as_text << "\n"
       end
+
       board_as_text
     end
 

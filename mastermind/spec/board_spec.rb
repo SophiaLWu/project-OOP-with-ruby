@@ -15,14 +15,14 @@ module Mastermind
     end
 
     context "#addblock" do
-      it "adds a block with a pattern and feedback to the @board_items array" do
+      it "adds a block with a pattern and clues to the @board_items array" do
         board = Board.new
         pattern = Pattern.new
         pattern.add_color("red")
         pattern.add_color("orange")
         pattern.add_color("yellow")
         pattern.add_color("green")
-        feedback = Feedback.new
+        comp = Computer.new
         board.add_block(pattern, board)
         expect(board.board_items) == [[[:R,:O,:Y,:G],[0,0]]]
       end
