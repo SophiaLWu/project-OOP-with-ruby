@@ -10,7 +10,7 @@ module Mastermind
     end
 
     context "#clues" do
-      it "returns an object that maps clue type" \
+      it "returns an object that maps clue type "\
          "(correct or correct_color) to a number" do
         feedback = Feedback.new
         expect(feedback.clues) == {correct: 0, correct_color: 0}

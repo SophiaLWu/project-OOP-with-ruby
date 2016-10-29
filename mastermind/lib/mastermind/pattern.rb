@@ -2,11 +2,16 @@ module Mastermind
 
   # Represents a single pattern block of 4 colored pegs
   class Pattern
-    attr_reader :colors
+    attr_reader :colors # TODO: Do I need this?
 
-    # Color arguments are symbols
-    def initialize(color1, color2, color3, color4)
-      @colors = [color1, color2, color3, color4]
+    def initialize
+      @colors = []
+    end
+
+    # Adds colors to the colors array by converting the given string
+    # color to a single uppercase letter symbol
+    def add_color(color)
+      @colors << color.upcase[0].to_sym
     end
 
   end
