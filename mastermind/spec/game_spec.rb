@@ -29,9 +29,42 @@ module Mastermind
 
       it "initializes @colors to an array of colors" do
         g = GameTest.new("Billy")
-        colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
+        colors = ["red", "orange", "yellow", "green", "blue", "purple"]
         expect(g.colors).to eq(colors)
           
+      end
+    end
+
+    context "#valid_input?" do
+      it "returns true when a valid full color is provided" do
+        g = GameTest.new("Billy")
+        expect(g.valid_input?("Blue")).to eq(true)
+      end
+
+      it "returns true when a valid abbreviated color is provided" do
+        g = GameTest.new("Billy")
+        expect(g.valid_input?("P")).to eq(true)
+      end
+
+      it "returns true when a valid lowercase color is provided" do
+        g = GameTest.new("Billy")
+        expect(g.valid_input?("orange")).to eq(true)
+      end
+
+      it "returns true when a valid lowercase abbreviated color is provided" do
+        g = GameTest.new("Billy")
+        expect(g.valid_input?("g")).to eq(true)
+      end
+
+      it "returns false when an invalid color is provided" do
+        g = GameTest.new("Billy")
+        expect(g.valid_input?("Indigo")).to eq(false)
+      end
+
+      it "returns false when an invalid color that starts with "\
+         "the same letter as a valid color is provided" do
+        g = GameTest.new("Billy")
+        expect(g.valid_input?("black")).to eq(false)
       end
     end
 

@@ -8,7 +8,7 @@ module Mastermind
       @board = Board.new
       @turn = 1
       @computer = Computer.new
-      @colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
+      @colors = ["red", "orange", "yellow", "green", "blue", "purple"]
       @secret_code = generate_secret_code
       @win = false
     end
@@ -44,9 +44,23 @@ module Mastermind
              "(R, O, Y, G, B, P)"
         print ">> "
         input = gets.chomp
+        until valid_input?(input)
+          puts "Invalid color! Choose from R, O, Y, G, B, P."
+          print ">> "
+          input = gets.chomp
+        end
         new_pattern.add_color(input)
       end
       new_pattern
+    end
+
+    # Returns true if input is valid
+    def valid_input?(input)
+      if input.length == 1 # When user gives abbreviated color
+        @colors.any? { |color| color[0] == input.downcase }
+      else # When user gives full color
+        @colors.include? input.downcase
+      end
     end
 
     # Returns true if player has won game and sets win variable to true
@@ -82,7 +96,6 @@ module Mastermind
       @board = Board.new
       @turn = 1
       @computer = Computer.new
-      @colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
       @secret_code = generate_secret_code
       @win = false
       play
