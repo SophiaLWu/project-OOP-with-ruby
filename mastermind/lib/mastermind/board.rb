@@ -17,7 +17,7 @@ module Mastermind
     # Returns a formatted board as a string that contains 
     # all of the items from board_items
     def formatted_board
-      board_as_text = "Current Guesses and Feedback History:\r\n"
+      board_as_text = "Current Guesses and Feedback History:\n"
       board_as_text << " " * 58 << "\# Correct\n"
       board_as_text << "Guess \#   Slot 1   Slot 2   Slot 3   Slot 4   "\
                        "\# Correct      Color\n"
@@ -34,10 +34,10 @@ module Mastermind
         block[1].each { |clue, num| board_as_text << "        #{num}   " }
         board_as_text << "\n"
       end
-
+      board_as_text << " \n"
       board_as_text
     end
-    
+
   end
 
 end

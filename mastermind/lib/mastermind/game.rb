@@ -22,13 +22,14 @@ module Mastermind
       end
 
       puts @board.formatted_board
-      puts "The secret code was #{@secret_code.pretty_print}"
+      puts "The secret code was '#{@secret_code.pretty_print}'."
       ending_screen
     end
 
     # Allows one turn to proceed with a new block being added to the board
     def take_turn
-      puts "TURN #{@turn}"
+      puts " \n" + "=" * 70
+      puts "TURN #{@turn} \n \n"
       puts @board.formatted_board
       guess = new_user_pattern
       feedback = @computer.give_feedback(guess, @secret_code)
@@ -39,7 +40,9 @@ module Mastermind
     def new_user_pattern
       new_pattern = Pattern.new
       1.upto(4) do |slot|
-        puts "What color would you like to place in Slot #{slot}?"
+        puts "What color would you like to place in Slot #{slot}? "\
+             "(R, O, Y, G, B, P)"
+        print ">> "
         input = gets.chomp
         new_pattern.add_color(input)
       end
@@ -68,7 +71,8 @@ module Mastermind
         puts "Sorry, you couldn't figure out the secret code. You lost."
       end
 
-      puts "Play again? (Y/N)"
+      puts " \nPlay again? (Y/N)"
+      print ">> "
       output = gets.chomp
       restart_game if output.downcase == "y"
     end

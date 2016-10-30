@@ -9,14 +9,20 @@ module Mastermind
     # Given a guess and the secret code, computer will increase the
     # clue counts of @clues appropriately and return the @clues array
     def give_feedback(guess, code)
-      temp_code = code.colors.dup
+      code_colors = code.colors.dup
+      guess_colors = guess.colors.dup
       clues = new_clues
       correct_colors = []
-      guess.colors.each_with_index do |color, index|
-        if color == temp_code[index]
+      guess_colors.each_with_index do |color, index|
+        if color == code_colors[index]
           clues[:correct] += 1
-          temp_code[index] = nil # Won't be included in test for correct color 
-        elsif temp_code.include?(color) && !correct_colors.include?(color)
+          code_colors[index] = nil # Won't be included for next testing
+          guess_colors[index] = nil # Same
+        end
+      end 
+      guess_colors.each_with_index do |color, index|
+        if !color.nil? && code_colors.include?(color) && 
+           !correct_colors.include?(color)
           clues[:correct_color] += 1
           correct_colors << color
         end

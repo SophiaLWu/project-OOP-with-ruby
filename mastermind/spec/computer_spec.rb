@@ -153,7 +153,7 @@ module Mastermind
       end
 
       it "does not give multiple clues when there are duplicate colors "\
-         "in guess" do
+         "in guess but only one in code" do
         c = Computer.new
         code = Pattern.new
         code.add_color("blue")
@@ -169,6 +169,77 @@ module Mastermind
         expect(clues[:correct]).to eq(0)
         expect(clues[:correct_color]).to eq(1)
       end
+
+      it "does not give multiple clues when there are duplicate colors "\
+         "in guess and multiple in code" do
+        c = Computer.new
+        code = Pattern.new
+        code.add_color("blue")
+        code.add_color("orange")
+        code.add_color("blue")
+        code.add_color("red")
+        guess = Pattern.new
+        guess.add_color("purple")
+        guess.add_color("blue")
+        guess.add_color("purple")
+        guess.add_color("blue")
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(0)
+        expect(clues[:correct_color]).to eq(1)
+      end
+
+      it "does give clue to a correct color when there is also a peg "\
+         "in guess with the same color, but also correct position" do
+        c = Computer.new
+        code = Pattern.new
+        code.add_color("blue")
+        code.add_color("orange")
+        code.add_color("blue")
+        code.add_color("red")
+        guess = Pattern.new
+        guess.add_color("blue")
+        guess.add_color("blue")
+        guess.add_color("purple")
+        guess.add_color("purple")
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_color]).to eq(1)
+      end
+
+      it "does not give duplicate clues when two are completely correct" do
+        c = Computer.new
+        code = Pattern.new
+        code.add_color("purple")
+        code.add_color("blue")
+        code.add_color("green")
+        code.add_color("purple")
+        guess = Pattern.new
+        guess.add_color("purple")
+        guess.add_color("red")
+        guess.add_color("green")
+        guess.add_color("blue")
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(2)
+        expect(clues[:correct_color]).to eq(1)
+      end
+
+      it "does not give duplicate clues when one is completely correct #2" do
+        c = Computer.new
+        code = Pattern.new
+        code.add_color("purple")
+        code.add_color("blue")
+        code.add_color("green")
+        code.add_color("purple")
+        guess = Pattern.new
+        guess.add_color("red")
+        guess.add_color("green")
+        guess.add_color("blue")
+        guess.add_color("purple")
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_color]).to eq(2)
+      end
+
     end
 
   end
