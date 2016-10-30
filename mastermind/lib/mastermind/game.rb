@@ -11,13 +11,19 @@ module Mastermind
       @computer = Computer.new
       @colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
       @secret_code = generate_secret_code
+      @win = false
     end
 
+    # Allows the game to be played
     def play
-      until @turn > 12
+      until @turn > 12 || win?
         take_turn
         @turn += 1
       end
+
+      puts @board.formatted_board
+      puts "The secret code was #{@secret_code.pretty_print}"
+      ending_screen
     end
 
     # Allows one turn to proceed with a new block being added to the board
@@ -38,6 +44,42 @@ module Mastermind
         new_pattern.add_color(input)
       end
       new_pattern
+    end
+
+    # Returns true if player has won game and sets win variable to true
+    def win?
+      if @board.board_items.empty? # When board is empty
+        false
+      elsif @board.board_items.last[0].colors == @secret_code.colors
+        @win = true
+        true
+      else
+        false
+      end
+    end
+
+    # Ending screen output
+    def ending_screen
+      if @win
+        puts "Congrats, you figured out the secret code! You won!"
+      else
+        puts "Sorry, you couldn't figure out the secret code. You lost."
+      end
+
+      puts "Play again? (Y/N)"
+      output = gets.chomp
+      restart_game if output.downcase == "y"
+    end
+
+    # Restarts the game with a new board and new code
+    def restart_game
+      @board = Board.new
+      @turn = 1
+      @computer = Computer.new
+      @colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
+      @secret_code = generate_secret_code
+      @win = false
+      play
     end
 
     private

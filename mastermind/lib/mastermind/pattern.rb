@@ -14,6 +14,10 @@ module Mastermind
       @colors << color.upcase[0].to_sym
     end
 
+    def pretty_print
+      s = @colors.map { |color| color.to_s }.join(" ")
+    end
+
   end
 
 end

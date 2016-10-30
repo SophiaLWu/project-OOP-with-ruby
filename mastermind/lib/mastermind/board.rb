@@ -23,7 +23,7 @@ module Mastermind
                        "\# Correct      Color\n"
       board_as_text << "-" * 68 << "\n"
       @board_items.each_with_index do |block, i|
-        if i < 10
+        if i < 9
           board_as_text << "   #{i + 1}   "
         else
           board_as_text << "   #{i + 1}  "
