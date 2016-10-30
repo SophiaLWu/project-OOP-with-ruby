@@ -15,20 +15,34 @@ module Mastermind
 
     # Starts and goes through one game of maastermind
     def play
-      puts @secret_code.colors # TESTING ONLY
+      instructions
+
+      # puts @secret_code.colors # TESTING ONLY
       until @turn > 12 || win?
         take_turn
         @turn += 1
       end
 
-      puts @board.formatted_board
-      puts "The secret code was '#{@secret_code.pretty_print}'."
       ending_screen
+    end
+
+    # Displays the instructions
+    def instructions
+      puts """\nHello! Welcome to Mastermind!
+      \nYou have 12 turns to guess a secret 4 color code made up of:
+        Red (R)             Green (G)
+        Orange (O)          Blue (B)
+        Yellow (Y)          Purple (P)
+      \nEach turn, you will enter your 4 color guess in 4 slots.
+      \nThe computer will then give you feedback about your guess.
+        1. The number of correct slots
+        2. The number of correct colors
+      \nGood Luck!"""
     end
 
     # Allows one turn to proceed with a new block being added to the board
     def take_turn
-      puts " \n" + "=" * 70
+      puts " \n" + "=" * 67
       puts "TURN #{@turn} \n \n"
       puts @board.formatted_board
       guess = new_user_pattern
@@ -79,16 +93,29 @@ module Mastermind
 
     # Ending screen output
     def ending_screen
-      if @win
-        puts "Congrats, you figured out the secret code! You won!"
-      else
-        puts "Sorry, you couldn't figure out the secret code. You lost."
-      end
+      puts " \n" + "=" * 67
+      puts" \nThe game is over!\n \n"
+      puts @board.formatted_board
+      puts "The secret code was '#{@secret_code.pretty_print}'."
+
+      dependent_ending_screen
 
       puts " \nPlay again? (Y/N)"
       print ">> "
       output = gets.chomp
       restart_game if output.downcase == "y"
+    end
+
+    # Ending screen depending on win or not
+    def dependent_ending_screen
+      if @win
+        puts " \nYOU WON!!\n"
+        puts "Congrats, you figured out the secret code!"
+      else
+        puts" \nYOU LOST.\n"
+        puts "Sorry, you couldn't figure out the secret code."
+      end
+      
     end
     
     # Restarts the game with a new board and new code

@@ -24,7 +24,7 @@ module Mastermind
         guess.add_color("red")
         guess.add_color("purple")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(4)
+        expect(clues[:correct_slot]).to eq(4)
         expect(clues[:correct_color]).to eq(0)
       end
 
@@ -42,7 +42,7 @@ module Mastermind
         guess.add_color("red")
         guess.add_color("yellow")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(3)
+        expect(clues[:correct_slot]).to eq(3)
         expect(clues[:correct_color]).to eq(0)
       end
 
@@ -60,7 +60,7 @@ module Mastermind
         guess.add_color("purple")
         guess.add_color("red")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(2)
+        expect(clues[:correct_slot]).to eq(2)
         expect(clues[:correct_color]).to eq(2)
       end
 
@@ -78,7 +78,7 @@ module Mastermind
         guess.add_color("purple")
         guess.add_color("blue")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_slot]).to eq(1)
         expect(clues[:correct_color]).to eq(3)
       end
 
@@ -96,7 +96,7 @@ module Mastermind
         guess.add_color("purple")
         guess.add_color("blue")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_slot]).to eq(1)
         expect(clues[:correct_color]).to eq(2)
       end
 
@@ -113,7 +113,7 @@ module Mastermind
         guess.add_color("orange")
         guess.add_color("orange")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_slot]).to eq(1)
         expect(clues[:correct_color]).to eq(0)
       end
 
@@ -131,7 +131,7 @@ module Mastermind
         guess.add_color("red")
         guess.add_color("purple")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(0)
+        expect(clues[:correct_slot]).to eq(0)
         expect(clues[:correct_color]).to eq(4)
       end
 
@@ -148,7 +148,7 @@ module Mastermind
         guess.add_color("orange")
         guess.add_color("green")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(0)
+        expect(clues[:correct_slot]).to eq(0)
         expect(clues[:correct_color]).to eq(0)
       end
 
@@ -166,7 +166,7 @@ module Mastermind
         guess.add_color("blue")
         guess.add_color("blue")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(0)
+        expect(clues[:correct_slot]).to eq(0)
         expect(clues[:correct_color]).to eq(1)
       end
 
@@ -184,7 +184,7 @@ module Mastermind
         guess.add_color("purple")
         guess.add_color("blue")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(0)
+        expect(clues[:correct_slot]).to eq(0)
         expect(clues[:correct_color]).to eq(1)
       end
 
@@ -202,7 +202,7 @@ module Mastermind
         guess.add_color("purple")
         guess.add_color("purple")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_slot]).to eq(1)
         expect(clues[:correct_color]).to eq(1)
       end
 
@@ -219,7 +219,7 @@ module Mastermind
         guess.add_color("green")
         guess.add_color("blue")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(2)
+        expect(clues[:correct_slot]).to eq(2)
         expect(clues[:correct_color]).to eq(1)
       end
 
@@ -236,7 +236,7 @@ module Mastermind
         guess.add_color("blue")
         guess.add_color("purple")
         clues = c.give_feedback(guess,code)
-        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_slot]).to eq(1)
         expect(clues[:correct_color]).to eq(2)
       end
 
