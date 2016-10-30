@@ -16,7 +16,7 @@ module Mastermind
     context "#colors" do
       it "returns an empty array after initialized" do
         pattern = Pattern.new
-        expect(pattern.colors) == []
+        expect(pattern.colors).to eq([])
       end
     end
 
@@ -25,14 +25,14 @@ module Mastermind
          "the colors array" do
           pattern = Pattern.new
           pattern.add_color("red")
-          expect(pattern.colors) == [:R]
+          expect(pattern.colors).to eq([:R])
       end 
 
       it "can convert an abbreviated color string to an upcase symbol and "\
          "add it to the colors array" do
           pattern = Pattern.new
           pattern.add_color("g")
-          expect(pattern.colors) == [:G]
+          expect(pattern.colors).to eq([:G])
       end
     end
 

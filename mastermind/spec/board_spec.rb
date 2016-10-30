@@ -9,7 +9,7 @@ module Mastermind
       end
 
       it "creates an empty array stored as @board_items" do
-        expect(Board.new.board_items) == []
+        expect(Board.new.board_items).to eq([])
       end
 
     end
@@ -22,9 +22,12 @@ module Mastermind
         pattern.add_color("orange")
         pattern.add_color("yellow")
         pattern.add_color("green")
+        feedback = {correct: 0, correct_color: 0}
         comp = Computer.new
-        board.add_block(pattern, board)
-        expect(board.board_items) == [[[:R,:O,:Y,:G],[0,0]]]
+        board.add_block(pattern, feedback)
+        expect(board.board_items[0][0].colors).to eq([:R,:O,:Y,:G])
+        expect(board.board_items[0][1][:correct]).to eq(0)
+        expect(board.board_items[0][1][:correct_color]).to eq(0)
       end
 
     end

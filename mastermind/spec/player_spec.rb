@@ -16,7 +16,7 @@ module Mastermind
     context "#name" do
       it "returns the name of a player" do
         player = Player.new("Bobby")
-        expect(player.name) == "Bobby"
+        expect(player.name).to eq("Bobby")
       end
     end
 

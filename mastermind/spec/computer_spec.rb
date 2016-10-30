@@ -23,7 +23,9 @@ module Mastermind
         guess.add_color("blue")
         guess.add_color("red")
         guess.add_color("purple")
-        expect(c.give_feedback(guess,code)) == {correct: 4, correct_colors: 0}
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(4)
+        expect(clues[:correct_color]).to eq(0)
       end
 
       it "returns correct clues when the guess is correct in 3 "\
@@ -39,7 +41,9 @@ module Mastermind
         guess.add_color("blue")
         guess.add_color("red")
         guess.add_color("yellow")
-        expect(c.give_feedback(guess,code)) == {correct: 3, correct_colors: 0}
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(3)
+        expect(clues[:correct_color]).to eq(0)
       end
 
       it "returns correct clues when the guess is correct in 2 "\
@@ -55,7 +59,9 @@ module Mastermind
         guess.add_color("blue")
         guess.add_color("purple")
         guess.add_color("red")
-        expect(c.give_feedback(guess,code)) == {correct: 2, correct_colors: 2}
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(2)
+        expect(clues[:correct_color]).to eq(2)
       end
 
       it "returns correct clues when the guess is correct in 1 "\
@@ -71,7 +77,9 @@ module Mastermind
         guess.add_color("red")
         guess.add_color("purple")
         guess.add_color("blue")
-        expect(c.give_feedback(guess,code)) == {correct: 1, correct_colors: 3}
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_color]).to eq(3)
       end
 
       it "returns correct clues when the guess is correct in 1 "\
@@ -87,7 +95,9 @@ module Mastermind
         guess.add_color("red")
         guess.add_color("purple")
         guess.add_color("blue")
-        expect(c.give_feedback(guess,code)) == {correct: 1, correct_colors: 2}
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_color]).to eq(2)
       end
 
       it "returns correct clues when the guess is correct in 1 slot only" do
@@ -102,7 +112,9 @@ module Mastermind
         guess.add_color("orange")
         guess.add_color("orange")
         guess.add_color("orange")
-        expect(c.give_feedback(guess,code)) == {correct: 1, correct_colors: 0}
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(1)
+        expect(clues[:correct_color]).to eq(0)
       end
 
       it "returns correct clues when the guess has 4 correct correct colors "\
@@ -118,7 +130,9 @@ module Mastermind
         guess.add_color("yellow")
         guess.add_color("red")
         guess.add_color("purple")
-        expect(c.give_feedback(guess,code)) == {correct: 0, correct_colors: 4}
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(0)
+        expect(clues[:correct_color]).to eq(4)
       end
 
       it "returns correct clues when the guess is completely incorrect" do
@@ -133,7 +147,27 @@ module Mastermind
         guess.add_color("green")
         guess.add_color("orange")
         guess.add_color("green")
-        expect(c.give_feedback(guess,code)) == {correct: 0, correct_colors: 0}
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(0)
+        expect(clues[:correct_color]).to eq(0)
+      end
+
+      it "does not give multiple clues when there are duplicate colors "\
+         "in guess" do
+        c = Computer.new
+        code = Pattern.new
+        code.add_color("blue")
+        code.add_color("orange")
+        code.add_color("green")
+        code.add_color("red")
+        guess = Pattern.new
+        guess.add_color("purple")
+        guess.add_color("blue")
+        guess.add_color("blue")
+        guess.add_color("blue")
+        clues = c.give_feedback(guess,code)
+        expect(clues[:correct]).to eq(0)
+        expect(clues[:correct_color]).to eq(1)
       end
     end
 

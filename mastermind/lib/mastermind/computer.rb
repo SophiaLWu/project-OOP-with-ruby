@@ -4,7 +4,6 @@ module Mastermind
   class Computer
 
     def initialize
-      # @clues = {correct: 0, correct_color: 0}
     end
 
     # Given a guess and the secret code, computer will increase the
@@ -12,12 +11,14 @@ module Mastermind
     def give_feedback(guess, code)
       temp_code = code.colors.dup
       clues = new_clues
+      correct_colors = []
       guess.colors.each_with_index do |color, index|
         if color == temp_code[index]
           clues[:correct] += 1
           temp_code[index] = nil # Won't be included in test for correct color 
         elsif temp_code.include? color
           clues[:correct_color] += 1
+          correct_colors << color
         end
       end
 

@@ -24,20 +24,21 @@ module Mastermind
       
       it "initializes @turn to 1" do
         g = GameTest.new("Billy")
-        expect(g.turn) == 1
+        expect(g.turn).to eq(1)
       end
 
       it "initializes @colors to an array of colors" do
         g = GameTest.new("Billy")
-        expect(g.colors) == \
-          ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
+        colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
+        expect(g.colors).to eq(colors)
+          
       end
     end
 
     context "#win?" do
       it "returns false when the board is empty" do
         g = GameTest.new("Billy")
-        expect(g.win?) == false
+        expect(g.win?).to eq(false)
       end
 
       it "returns true when the player has guessed the secret code" do
@@ -46,7 +47,7 @@ module Mastermind
         guess.add_color("yellow")
         feedback = g.computer.give_feedback(guess, g.secret_code)
         g.board.add_block(guess, feedback)
-        expect(g.win?) == true
+        expect(g.win?).to eq(true)
       end
     end
 
@@ -58,7 +59,7 @@ module Mastermind
           color == :R || color == :O || color == :Y || color == :G ||
           color == :B || color == :P
         end
-        expect(only_colors) == true
+        expect(only_colors).to eq(true)
       end
     end
 

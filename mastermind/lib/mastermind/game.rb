@@ -15,6 +15,7 @@ module Mastermind
 
     # Starts and goes through one game of maastermind
     def play
+      puts @secret_code.colors # TESTING ONLY
       until @turn > 12 || win?
         take_turn
         @turn += 1
