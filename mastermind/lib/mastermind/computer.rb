@@ -16,7 +16,7 @@ module Mastermind
         if color == temp_code[index]
           clues[:correct] += 1
           temp_code[index] = nil # Won't be included in test for correct color 
-        elsif temp_code.include? color
+        elsif temp_code.include?(color) && !correct_colors.include?(color)
           clues[:correct_color] += 1
           correct_colors << color
         end
