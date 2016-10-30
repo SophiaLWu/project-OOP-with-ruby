@@ -2,7 +2,6 @@ module Mastermind
 
   # Represents one game of mastermind and adds functionality for gameplay
   class Game
-    attr_reader :turn, :player, :secret_code, :colors, :computer
 
     def initialize(player)
       @player = player
@@ -14,7 +13,7 @@ module Mastermind
       @win = false
     end
 
-    # Allows the game to be played
+    # Starts and goes through one game of maastermind
     def play
       until @turn > 12 || win?
         take_turn
@@ -58,6 +57,8 @@ module Mastermind
       end
     end
 
+    private
+
     # Ending screen output
     def ending_screen
       if @win
@@ -70,7 +71,7 @@ module Mastermind
       output = gets.chomp
       restart_game if output.downcase == "y"
     end
-
+    
     # Restarts the game with a new board and new code
     def restart_game
       @board = Board.new
@@ -81,8 +82,6 @@ module Mastermind
       @win = false
       play
     end
-
-    private
 
     # Returns a randomly generated secret code
     def generate_secret_code

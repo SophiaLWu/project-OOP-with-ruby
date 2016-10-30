@@ -2,7 +2,6 @@ module Mastermind
 
   # Represents the computer player
   class Computer
-    # attr_accessor :clues
 
     def initialize
       # @clues = {correct: 0, correct_color: 0}

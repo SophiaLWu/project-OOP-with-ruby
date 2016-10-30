@@ -2,7 +2,7 @@ module Mastermind
 
   # Represents the mastermind board, consisting of all of the patterns guessed
   class Board
-    attr_accessor :board_items # TODO: Do I need this?
+    attr_accessor :board_items
 
     def initialize
       @board_items = []
@@ -37,9 +37,7 @@ module Mastermind
 
       board_as_text
     end
-
-    private
-
+    
   end
 
 end

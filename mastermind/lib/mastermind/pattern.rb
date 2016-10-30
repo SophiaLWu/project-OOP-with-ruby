@@ -2,7 +2,7 @@ module Mastermind
 
   # Represents a single pattern block of 4 colored pegs
   class Pattern
-    attr_reader :colors # TODO: Do I need this?
+    attr_reader :colors
 
     def initialize
       @colors = []
