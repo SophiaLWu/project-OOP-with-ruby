@@ -29,11 +29,13 @@ module Mastermind
     # Displays the instructions
     def instructions
       puts """\nHello! Welcome to Mastermind!
-      \nYou have 12 turns to guess a secret 4 color code made up of:
-        Red (R)             Green (G)
-        Orange (O)          Blue (B)
-        Yellow (Y)          Purple (P)
-      \nEach turn, you will enter your 4 color guess in 4 slots.
+      \nYou have 12 turns to guess a secret 4 color code made up of:"""
+      @colors.each do |color|
+        first_letter = color.upcase[0]
+        puts "        " + Paint["#{color} #{(first_letter)}", \
+                                @board.colorized[first_letter.to_sym], "black"]
+      end
+      puts """\nEach turn, you will enter your 4 color guess in each of 4 slots.
       \nThe computer will then give you feedback about your guess.
         1. The number of correct slots
         2. The number of correct colors
