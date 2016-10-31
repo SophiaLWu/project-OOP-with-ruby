@@ -6,8 +6,10 @@ module Mastermind
 
     def initialize
       @board_items = []
-      @colorized = {R: [220,20,60], O: [255,163,0], Y: [255,215,0], \
-                    G: [34,139,34], B: [30,144,255], P: [148,0,211]}
+
+      # For formatting of colored output 
+      @colorized = { R: [220,20,60], O: [255,163,0], Y: [255,215,0], 
+                     G: [34,139,34], B: [30,144,255], P: [148,0,211] }
     end
 
     # Takes in a pattern object and a feedback object and adds it to the
@@ -27,9 +29,9 @@ module Mastermind
       board_as_text << "-" * 67 << "\n"
       @board_items.each_with_index do |block, i|
         if i < 9
-          board_as_text << Paint["   #{i + 1}   ","white", background]
+          board_as_text << Paint["   #{i + 1}   ", "white", background]
         else
-          board_as_text << Paint["   #{i + 1}  ","white", background]
+          board_as_text << Paint["   #{i + 1}  ", "white", background]
         end
         block[0].colors.each do |color|
           board_as_text << Paint["      #{color.to_s}  ", \
@@ -43,26 +45,6 @@ module Mastermind
 
       board_as_text << " \n"
     end
-
-    # private
-
-    # # Returns the correct color for colorizing text in command line
-    # def colored(color)
-    #   case color
-    #   when :R
-    #     [220,20,60]
-    #   when :O
-    #     [255,163,0]
-    #   when :Y
-    #     [255,215,0]
-    #   when :G
-    #     [34,139,34]
-    #   when :B
-    #     [30,144,255]
-    #   when :P
-    #     [148,0,211]
-    #   end
-    # end
 
   end
 
