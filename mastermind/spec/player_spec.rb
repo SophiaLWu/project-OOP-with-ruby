@@ -11,6 +11,11 @@ module Mastermind
       it "raises an error when initialized without arguments" do
         expect { Player.new }.to raise_error(ArgumentError)
       end
+
+      it "initially sets role to nil" do
+        player = Player.new("Bob")
+        expect(player.role).to eq(nil)
+      end
     end
 
     context "#name" do

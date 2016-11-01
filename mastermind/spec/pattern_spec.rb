@@ -36,5 +36,41 @@ module Mastermind
       end
     end
 
+    context "#pretty_pretty" do
+      it "returns a stringified version of the colors of a pattern" do
+        pattern = Pattern.new
+        pattern.add_color("red")
+        pattern.add_color("green")
+        pattern.add_color("blue")
+        pattern.add_color("red")
+        expect(pattern.pretty_print).to eq("Red Green Blue Red")
+      end
+    end
+
+    context "#print_abbreviated_colors" do
+      it "returns a stringified version of the abbrev. colors of a pattern" do
+        pattern = Pattern.new
+        pattern.add_color("red")
+        pattern.add_color("green")
+        pattern.add_color("blue")
+        pattern.add_color("red")
+        expect(pattern.print_abbreviated_colors).to eq("R  G  B  R")
+      end
+    end
+
+    context "#generate_random_pattern" do
+      it "returns a randomly generated pattern of four colors" do
+        pattern = Pattern.new
+        colors = ["red", "orange", "yellow", "green", "blue", "purple"]
+        random = pattern.generate_random_pattern(colors)
+        expect(pattern.colors.size) == 4
+        only_colors = pattern.colors.all? do |color|
+          color == :R || color == :O || color == :Y || color == :G ||
+          color == :B || color == :P
+        end
+        expect(only_colors).to eq(true)
+      end
+    end
+
   end
 end

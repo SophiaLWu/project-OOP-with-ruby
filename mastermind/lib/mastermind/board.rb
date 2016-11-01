@@ -2,10 +2,11 @@ module Mastermind
 
   # Represents the mastermind board, consisting of all of the patterns guessed
   class Board
-    attr_accessor :board_items, :colorized
+    attr_accessor :guesses, :feedback, :colorized
 
     def initialize
-      @board_items = []
+      @guesses = []
+      @feedback = []
 
       # For formatting of colored output 
       @colorized = { R: [220,20,60], O: [255,163,0], Y: [255,215,0], 
@@ -13,31 +14,33 @@ module Mastermind
     end
 
     # Takes in a pattern object and a feedback object and adds it to the
-    # board_items array
+    # guesses and feedback arrays
     def add_block(pattern, feedback)
-      @board_items << [pattern, feedback]
+      @guesses << pattern
+      @feedback << feedback
     end
 
     # Returns a formatted board as a string that contains 
-    # all of the items from board_items
+    # all of the items from @gusses and @feedback
     def formatted_board
       background = [40,40,40] # Background color for table
-      board_as_text = "Current Guesses and Feedback History:\n"
+      board_as_text = "\nCurrent Guesses and Feedback History:\n"
       board_as_text << " " * 46 << "\# Correct   \# Correct\n"
       board_as_text << "Guess \#   Slot 1   Slot 2   Slot 3   Slot 4      "\
                        "Slot        Color\n"
       board_as_text << "-" * 67 << "\n"
-      @board_items.each_with_index do |block, i|
+
+      @guesses.each_with_index do |guess, i|
         if i < 9
           board_as_text << Paint["   #{i + 1}   ", "white", background]
         else
           board_as_text << Paint["   #{i + 1}  ", "white", background]
         end
-        block[0].colors.each do |color|
+        guess.colors.each do |color|
           board_as_text << Paint["      #{color.to_s}  ", \
                                  @colorized[color], background]
         end
-        block[1].each do |clue, num| 
+        @feedback[i].each do |clue, num| 
           board_as_text << Paint["        #{num}   ", "white", background]
         end
         board_as_text << "\n"

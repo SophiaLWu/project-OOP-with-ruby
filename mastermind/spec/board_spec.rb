@@ -8,26 +8,29 @@ module Mastermind
         expect { Board.new }.to_not raise_error
       end
 
-      it "creates an empty array stored as @board_items" do
-        expect(Board.new.board_items).to eq([])
+      it "creates an empty array stored as guesses" do
+        expect(Board.new.guesses).to eq([])
+      end
+
+      it "creates an empty array stored as feedback" do
+        expect(Board.new.feedback).to eq([])
       end
 
     end
 
     context "#addblock" do
-      it "adds a block with a pattern and clues to the @board_items array" do
+      it "adds a pattern to @guesses and adds a pattern to the @feedback" do
         board = Board.new
         pattern = Pattern.new
         pattern.add_color("red")
         pattern.add_color("orange")
         pattern.add_color("yellow")
         pattern.add_color("green")
-        feedback = {correct: 0, correct_color: 0}
-        comp = Computer.new
+        feedback = {correct_slot: 0, correct_color: 0}
         board.add_block(pattern, feedback)
-        expect(board.board_items[0][0].colors).to eq([:R,:O,:Y,:G])
-        expect(board.board_items[0][1][:correct]).to eq(0)
-        expect(board.board_items[0][1][:correct_color]).to eq(0)
+        expect(board.guesses[0].colors).to eq([:R,:O,:Y,:G])
+        expect(board.feedback[0][:correct_slot]).to eq(0)
+        expect(board.feedback[0][:correct_color]).to eq(0)
       end
 
     end

@@ -14,9 +14,9 @@ module Mastermind
       @colors << color.upcase[0].to_sym # Allows user to both type in the full
     end                                 # color name or abbreviated color
 
-    # Returns a string of the pattern
+    # Returns a string of the colors in the pattern
     def pretty_print
-      s = (@colors.map do |color|
+      s = @colors.map do |color|
         case color
         when :R
           "Red"
@@ -31,7 +31,23 @@ module Mastermind
         else
           "Purple"
         end
-      end).join(" ")
+      end
+      .join(" ")
+    end
+
+    # Returns a string of the abbreivated colors in the pattern
+    def print_abbreviated_colors
+      @colors.map do |color|
+        color.to_s
+      end
+      .join("  ")
+    end
+
+    # Generates a random pattern
+    def generate_random_pattern(possible_colors)
+      4.times do
+        add_color(possible_colors.sample)
+      end
     end
 
   end

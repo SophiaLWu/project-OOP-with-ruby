@@ -74,25 +74,14 @@ module Mastermind
         expect(g.win?).to eq(false)
       end
 
-      it "returns true when the player has guessed the secret code" do
+      it "returns true when the codebreaker has guessed the secret code" do
         g = GameTest.new("Billy")
-        guess = g.secret_code.dup
-        guess.add_color("yellow")
-        feedback = g.computer.give_feedback(guess, g.secret_code)
-        g.board.add_block(guess, feedback)
+        g.secret_code = Pattern.new
+        g.secret_code.generate_random_pattern(g.colors)
+        g.computer = Computer.new("codemaker")
+        feedback = g.computer.give_feedback(g.secret_code, g.secret_code)
+        g.board.add_block(g.secret_code, feedback)
         expect(g.win?).to eq(true)
-      end
-    end
-
-    context "#generate_secret_code" do
-      it "returns a randomly generated pattern of four colors" do
-        g = GameTest.new("Jonas")
-        expect(g.secret_code.colors.size) == 4
-        only_colors = g.secret_code.colors.all? do |color|
-          color == :R || color == :O || color == :Y || color == :G ||
-          color == :B || color == :P
-        end
-        expect(only_colors).to eq(true)
       end
     end
 

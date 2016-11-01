@@ -1,4 +1,4 @@
 require_relative "lib/mastermind"
 
 g = Mastermind::Game.new("Sophia")
-g.play
+g.play_game
