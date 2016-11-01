@@ -255,7 +255,7 @@ module Mastermind
             code.add_color("blue")
             code.add_color("green")
             code.add_color("purple")
-            pattern = c.give_pattern(code, [], colors)
+            pattern = c.give_pattern(code, colors, [])
             expect(pattern.colors.size) == 4
             only_colors = pattern.colors.all? do |color|
                 color == :R || color == :O || color == :Y || color == :G ||
@@ -277,7 +277,7 @@ module Mastermind
             guess1.add_color("yellow")
             guess1.add_color("green")
             guess1.add_color("yellow")
-            new_guess = c.give_pattern(code, [guess1], colors)
+            new_guess = c.give_pattern(code, colors, [guess1])
             expect(new_guess.colors[0]).to eq(:P)
             expect(new_guess.colors[2]).to eq(:G)
         end
@@ -301,7 +301,7 @@ module Mastermind
             guess2.add_color("blue")
             guess2.add_color("yellow")
             guess2.add_color("red")
-            new_guess = c.give_pattern(code, [guess1, guess2], colors)
+            new_guess = c.give_pattern(code, colors, [guess1, guess2])
             expect(new_guess.colors[0]).to eq(:P)
             expect(new_guess.colors[1]).to eq(:B)
         end

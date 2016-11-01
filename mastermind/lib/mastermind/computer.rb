@@ -62,28 +62,65 @@ module Mastermind
 
     public
 
-    # Given a secret code, array of guesses, and all possible colors,
-    # returns a new guess
-    def give_pattern(code, all_guesses, possible_colors)
+    # Given a secret code and all possible colors, returns a new guess
+    def give_pattern(code, possible_colors, guesses)
       new_pattern = Pattern.new
-      0.upto(3) do |slot|
-        if correct_slot?(code, all_guesses, slot)
-          new_pattern.add_color(code.colors[slot])
-        else
+      last_guess = guesses.empty? ? [] : guesses.last.colors.dup
+      temp_code = code.colors.dup
+      temp_guess = [nil, nil, nil, nil]
+      guess_and_code = add_correct_slots(temp_guess, code, temp_code, guesses, \
+                                         last_guess)
+      temp_guess = add_correct_colors(guess_and_code[0], guess_and_code[1], \
+                                      guess_and_code[2])
+      
+      temp_guess.each do |color|
+        if color == nil
           new_pattern.add_color(possible_colors.sample)
+        else
+          new_pattern.add_color(color)
         end
       end
-
       new_pattern
     end
 
-    # Given a code, an array of guesses and a slot number, determines
-    # if a certain slot was correct in any of the previous guesses
-    def correct_slot?(code, guesses, slot)
+    # Any any colors in correct slots to the temp_guess
+    def add_correct_slots(temp_guess, code, temp_code, guesses, last_guess)
+      0.upto(3) do |slot|
+        if correct_slot?(code, slot, guesses)
+          temp_guess[slot] = code.colors[slot]
+          temp_code[slot] = nil
+          last_guess[slot] = nil
+        end
+      end
+      [temp_guess, temp_code, last_guess]
+    end
+
+    # Given a code, determines if a certain slot was correct in 
+    # any of the previous guesses
+    def correct_slot?(code, slot, guesses)
       guesses.each do |guess|
         return true if guess.colors[slot] == code.colors[slot]
       end
       false
+    end
+
+    # Add any correct colors to the temp_guess
+    def add_correct_colors(temp_guess, temp_code, last_guess)
+      must_place = {}
+      last_guess.each_with_index do |color, slot|
+        if color != nil && temp_code.include?(color)
+          must_place[color] = slot
+        end
+      end
+      must_place.each do |correct_color, prev_slot|
+        temp_guess.each_with_index do |color, slot|
+          if color == nil && prev_slot != slot
+            temp_guess[slot] = correct_color
+            break
+          end
+        end
+      end
+      temp_guess
     end
 
   end

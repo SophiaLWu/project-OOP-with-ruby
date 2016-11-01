@@ -191,7 +191,7 @@ module Mastermind
 
     # Allows computer to add a pattern and player to add feedback 
     def computer_add_block
-      guess = @computer.give_pattern(@secret_code, @board.guesses, @colors)
+      guess = @computer.give_pattern(@secret_code, @colors, @board.guesses)
       feedback = get_feedback(guess)
       @board.add_block(guess, feedback)
     end
