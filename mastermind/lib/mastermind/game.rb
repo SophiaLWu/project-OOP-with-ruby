@@ -17,9 +17,10 @@ module Mastermind
     def play_game
       instructions
       play_one_round
-      puts "Goodbye!"
+      puts "\nGoodbye!"
     end
 
+    # Plays one round of the game
     def play_one_round
       @player.choose_role
       @computer = Computer.new(@player.role)
@@ -36,7 +37,6 @@ module Mastermind
 
     # Displays the instructions
     def instructions
-      #TODO: Change instructions
       puts """\nHello! Welcome to Mastermind!
       \nThis is a 2-player game in which there is a codemaker and a codebreaker.
       \nThe codemaker will make a secret 4-color code consisting of:"""
@@ -45,8 +45,9 @@ module Mastermind
         puts "      " + Paint["#{color} (#{first_letter})", \
                                 @board.colorized[first_letter.to_sym], "black"]
       end
-      puts"""\nThe codebreaker has 12 turns to guess that 4-color code.
-      \nIf you are the codemaker:
+      puts "The codebreaker has 12 turns to guess that 4-color code, given "\
+      "feedback from the codemaker."
+      puts """\nIf you are the codemaker:
       You will first start off by making a 4-color code.
       Each turn, the computer will make a guess.
       You must then give the following feedback about the computer's guess:
@@ -136,7 +137,7 @@ module Mastermind
       puts " \n" + "=" * 67
       puts" \nThe game is over!\n \n"
       puts @board.formatted_board
-      puts "The secret code was '#{@secret_code.pretty_print}'."
+      puts "The secret code was #{@secret_code.pretty_print}."
 
       if @player.role == "codebreaker"
         player_as_codebreaker_ending
